@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/loginViewsMargin"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/jugsize1"
+            style="@style/parent"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            app:boxStrokeColor="@color/primaryTextColor">
+
+            <EditText
+                android:id="@+id/size1"
+                style="@style/modifiedEditText"
+                android:hint="Enter jug size 1"
+                android:inputType="phone"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/jugsize2"
+            style="@style/parent"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            app:boxStrokeColor="@color/primaryTextColor">
+
+            <EditText
+                android:id="@+id/size2"
+                style="@style/modifiedEditText"
+                android:hint="Enter jug size 2"
+                android:inputType="phone"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/main_target"
+            style="@style/parent"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            app:boxStrokeColor="@color/primaryTextColor">
+
+            <EditText
+                android:id="@+id/tar"
+                style="@style/modifiedEditText"
+                android:hint="Enter the target"
+                android:inputType="phone"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+        <!--        <EditText-->
+<!--            android:id="@+id/jugsize1"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="55dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:hint="Enter Jug Size 1"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:background="@drawable/back_diag_but"-->
+<!--            android:layout_marginBottom="6dp"-->
+<!--            />-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/jugsize2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="55dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:hint="Enter Jug Size 2"-->
+<!--            android:background="@drawable/back_diag_but" -->
+<!--            android:layout_marginBottom="6dp"-->
+<!--            />-->
+
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            >
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/but_cancel"
+                style="@style/viewParent"
+                android:layout_gravity="end"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"
+                android:text="Cancel"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="15dp"
+                tools:ignore="TextContrastCheck" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/but_ok"
+                style="@style/viewParent"
+                android:layout_gravity="end"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:padding="5dp"
+                android:text="Ok"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="15dp"
+                tools:ignore="TextContrastCheck" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+</FrameLayout>
