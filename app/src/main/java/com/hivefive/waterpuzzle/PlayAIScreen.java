@@ -3,7 +3,9 @@ package com.hivefive.waterpuzzle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -14,6 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PlayAIScreen extends AppCompatActivity {
 
@@ -23,7 +26,9 @@ public class PlayAIScreen extends AppCompatActivity {
     int jug1, jug2, target, progress1, progress2, progress3, check1, check2, check3;
     Result result;
     Pair results;
+    private Handler mHandler = new Handler();
     int k = 0;
+    int n;
     CountDownTimer mCountDownTimer;
 
     @Override
@@ -52,100 +57,71 @@ public class PlayAIScreen extends AppCompatActivity {
         pb3.setMax(jug2);
 
 
-        int n = results.path.size();
+        n = results.path.size();
 
 
 
-        for (int i = 0; i < n; i++) {
-            k = 0;
-            int finalI = i;
+//        for (int i = 0; i < n; i++) {
+//
+//            int finalI = i;
+//
+//
+//            progress1 = pb1.getProgress();
+//            progress2 = pb2.getProgress();
+//            progress3 = pb3.getProgress();
+//
+//            check2 = results.path.get(finalI).j1;
+//            check3 = results.path.get(finalI).j2;
+//            check1 = 20 - (check2 + check3);
+//
+//
+//
+//
+//
+//               new Handler().postDelayed(new Runnable() {
+//                    public void run() {
+//                        pb1.setProgress(check1);
+//                        scr1.setText(check1 + "/" + 20);
+//
+//
+//
+//                        pb2.setProgress(check2);
+//                        scr2.setText(check2 + "/" + jug1);
+//
+//
+//
+//                        pb3.setProgress(check3);
+//                        scr3.setText(check3 + "/" + jug2);
+//                    }
+//                }, delay);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//        }
 
-
-
-            new CountDownTimer(3000, 1000) {
-
-                public void onTick(long millisUntilFinished) {
-                    // You don't need anything here
-                }
-
-                public void onFinish() {
-
-
-
-
-
-                    progress1 = pb1.getProgress();
-                    progress2 = pb2.getProgress();
-                    progress3 = pb3.getProgress();
-
-                    check2 = results.path.get(finalI).j1;
-                    check3 = results.path.get(finalI).j2;
-                    check1 = 20 - (check2 + check3);
-                    k++;
-                    if (progress1 > check1) {
-
-                        pb1.setProgress(check1);
-                        scr1.setText(check1 + "/" + 20);
-
-
-                    } else {
-
-                        pb1.setProgress(check1);
-                        scr1.setText(check1 + "/" + 20);
-
-
-                    }
-
-
-                    if (progress2 > check2) {
-
-                        pb2.setProgress(check2);
-                        scr2.setText(check2 + "/" + jug1);
-
-
-                    } else {
-
-                        pb2.setProgress(check2);
-                        scr2.setText(check2 + "/" + jug1);
-
-
-                    }
-
-                    if (progress3 > check3) {
-
-                        pb3.setProgress(check3);
-                        scr3.setText(check3 + "/" + jug2);
-
-
-                    } else {
-
-                        pb3.setProgress(check3);
-                        scr3.setText(check3 + "/" + jug2);
-
-
-                    }
+        mToastRunnable.run();
 
 
 
 
-
-
-
-
-
-                }
-            }.start();
-
-
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-
-
+    new Handler().postDelayed(new Runnable() {
+        @Override
+        public void run() {
+            mHandler.removeCallbacks(mToastRunnable);
+            Toast.makeText(PlayAIScreen.this, "This is your Result :)))", Toast.LENGTH_SHORT).show();
         }
+    }, delay * n);
+
+
+
+
 
 
 
@@ -247,4 +223,50 @@ public class PlayAIScreen extends AppCompatActivity {
 
 
     }
+
+
+
+    private Runnable mToastRunnable = new Runnable() {
+        @Override
+        public void run() {
+
+
+            progress1 = pb1.getProgress();
+            progress2 = pb2.getProgress();
+            progress3 = pb3.getProgress();
+
+            check2 = results.path.get(k).j1;
+            check3 = results.path.get(k).j2;
+            check1 = 20 - (check2 + check3);
+
+
+            pb1.setProgress(check1);
+            scr1.setText(check1 + "/" + 20);
+
+
+
+            pb2.setProgress(check2);
+            scr2.setText(check2 + "/" + jug1);
+
+
+
+            pb3.setProgress(check3);
+            scr3.setText(check3 + "/" + jug2);
+
+
+
+
+
+
+            k++;
+
+
+            mHandler.postDelayed(this, delay);
+        }
+    };
+
+
+
 }
+
+
