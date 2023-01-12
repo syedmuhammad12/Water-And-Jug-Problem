@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Water Puzzle</string>
-    <string name="user"> >>Total number of jugs should be equal to 3     >>Value of water in both jugs should be less than 10</string>
+    <string name="user"> >>Total number of jugs should be equal to 3
+        >>Value of water in both jugs should be less than 10</string>
 </resources>

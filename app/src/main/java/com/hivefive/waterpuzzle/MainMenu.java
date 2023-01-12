@@ -32,7 +32,6 @@ public class MainMenu extends AppCompatActivity {
         getSupportActionBar().hide();
 
         game_start = findViewById(R.id.start);
-        game_exit = findViewById(R.id.exit);
 
 
         game_start.setOnClickListener(new View.OnClickListener() {
@@ -101,10 +100,13 @@ public class MainMenu extends AppCompatActivity {
        // MainMenu.this.finish();
 
         // on below line we are exiting our activity
-        //System.exit(0);
-        moveTaskToBack(true);
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(1);
+        finishAffinity();
+        System.exit(0);
+//        Intent a = new Intent(Intent.ACTION_MAIN);
+//        a.addCategory(Intent.CATEGORY_HOME);
+//        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(a);
+//        finishAffinity();
     }
 
     public void Usermanual(View view) {
@@ -115,10 +117,5 @@ public class MainMenu extends AppCompatActivity {
     }
 
 
-    public void back(View view) {
-        Intent intent = new Intent(getApplicationContext(), MainMenu.class);
-        startActivity(intent);
-        finish();
 
-    }
 }

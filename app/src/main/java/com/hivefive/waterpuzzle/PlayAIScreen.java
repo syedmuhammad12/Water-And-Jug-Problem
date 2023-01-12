@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -43,98 +44,105 @@ public class PlayAIScreen extends AppCompatActivity {
         result = (Result) getIntent().getSerializableExtra("results");
         results = result.main_res;
 
-        scr2.setText("00/"+jug1);
-        scr3.setText("00/"+jug2);
+        scr2.setText("00/" + jug1);
+        scr3.setText("00/" + jug2);
 
         pb1.setMax(20);
         pb2.setMax(jug1);
         pb3.setMax(jug2);
 
 
-        int n =results.path.size();
+        int n = results.path.size();
 
 
 
-
-        for(int i = 0; i<n ; i++){
-
+        for (int i = 0; i < n; i++) {
             k = 0;
             int finalI = i;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
 
 
-                    mCountDownTimer=new CountDownTimer(delay-250,1000) {
 
-                        @Override
-                        public void onTick(long millisUntilFinished) {
-//                            mProgressBar.setProgress((int)i*100/(5000/1000));
+            new CountDownTimer(3000, 1000) {
 
-                            progress1 = pb1.getProgress();
-                            progress2 = pb2.getProgress();
-                            progress3 = pb3.getProgress();
+                public void onTick(long millisUntilFinished) {
+                    // You don't need anything here
+                }
 
-                            check2 = results.path.get(finalI).j1;
-                            check3 = results.path.get(finalI).j2;
-                            check1 = 20 - (check2 + check3);
-                            k++;
-                            if (progress1 > check1) {
-
-                                pb1.setProgress(progress1 - ((int) k*check1/((delay-250)/1000)));
-
-                            } else{
-
-                                pb1.setProgress(progress1 + ((int) k*check1/((delay-250)/1000)));
-
-                            }
-
-
-                            if (progress2 > check2) {
-
-                                pb2.setProgress(progress2 - ((int) k*check2/((delay-250)/1000)));
-
-                            } else{
-
-                                pb2.setProgress(progress2 + ((int) k*check2/((delay-250)/1000)));
-
-                            }
-
-                            if (progress3 > check3) {
-
-                                pb3.setProgress(progress3 - ((int) k*check3/((delay-250)/1000)));
-
-                            } else{
-
-                                pb3.setProgress(progress3 + ((int) k*check3/((delay-250)/1000)));
-
-                            }
+                public void onFinish() {
 
 
 
 
-                        }
 
-                        @Override
-                        public void onFinish() {
+                    progress1 = pb1.getProgress();
+                    progress2 = pb2.getProgress();
+                    progress3 = pb3.getProgress();
 
-                            pb1.setProgress(check1);
-                            pb2.setProgress(check2);
-                            pb3.setProgress(check3);
+                    check2 = results.path.get(finalI).j1;
+                    check3 = results.path.get(finalI).j2;
+                    check1 = 20 - (check2 + check3);
+                    k++;
+                    if (progress1 > check1) {
 
-                            scr1.setText(check1 + "/" + 20);
-                            scr2.setText(check2 + "/" + jug1);
-                            scr3.setText(check3 + "/" + jug2);
+                        pb1.setProgress(check1);
+                        scr1.setText(check1 + "/" + 20);
 
-                        }
-                    };
-                    mCountDownTimer.start();
+
+                    } else {
+
+                        pb1.setProgress(check1);
+                        scr1.setText(check1 + "/" + 20);
+
+
+                    }
+
+
+                    if (progress2 > check2) {
+
+                        pb2.setProgress(check2);
+                        scr2.setText(check2 + "/" + jug1);
+
+
+                    } else {
+
+                        pb2.setProgress(check2);
+                        scr2.setText(check2 + "/" + jug1);
+
+
+                    }
+
+                    if (progress3 > check3) {
+
+                        pb3.setProgress(check3);
+                        scr3.setText(check3 + "/" + jug2);
+
+
+                    } else {
+
+                        pb3.setProgress(check3);
+                        scr3.setText(check3 + "/" + jug2);
+
+
+                    }
+
+
+
+
+
 
 
 
 
                 }
-            }, delay);
+            }.start();
+
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
 
 
         }
@@ -145,12 +153,97 @@ public class PlayAIScreen extends AppCompatActivity {
 
 
 
+//        for (int i = 0; i < n; i++) {
+//
+//            k = 0;
+//            int finalI = i;
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
 
 
+//                    mCountDownTimer=new CountDownTimer(10000,500) {
+//
+//                        @Override
+//                        public void onTick(long millisUntilFinished) {
+////                            mProgressBar.setProgress((int)i*100/(5000/1000));
+
+//                    progress1 = pb1.getProgress();
+//                    progress2 = pb2.getProgress();
+//                    progress3 = pb3.getProgress();
+//
+//                    check2 = results.path.get(finalI).j1;
+//                    check3 = results.path.get(finalI).j2;
+//                    check1 = 20 - (check2 + check3);
+//                    k++;
+//                    if (progress1 > check1) {
+//
+//                        pb1.setProgress(check1);
+//                        scr1.setText(check1 + "/" + 20);
+//
+//
+//                    } else {
+//
+//                        pb1.setProgress(check1);
+//                        scr1.setText(check1 + "/" + 20);
+//
+//
+//                    }
+//
+//
+//                    if (progress2 > check2) {
+//
+//                        pb2.setProgress(check2);
+//                        scr2.setText(check2 + "/" + jug1);
+//
+//
+//                    } else {
+//
+//                        pb2.setProgress(check2);
+//                        scr2.setText(check2 + "/" + jug1);
+//
+//
+//                    }
+//
+//                    if (progress3 > check3) {
+//
+//                        pb3.setProgress(check3);
+//                        scr3.setText(check3 + "/" + jug2);
+//
+//
+//                    } else {
+//
+//                        pb3.setProgress(check3);
+//                        scr3.setText(check3 + "/" + jug2);
+//
+//
+//                    }
+//
+//
+//                }
+
+//                        @Override
+//                        public void onFinish() {
+//
+//                            pb1.setProgress(check1);
+//                            pb2.setProgress(check2);
+//                            pb3.setProgress(check3);
+//
+//                            scr1.setText(check1 + "/" + 20);
+//                            scr2.setText(check2 + "/" + jug1);
+//                            scr3.setText(check3 + "/" + jug2);
+//
+//                        }
+//                    };
+//                    mCountDownTimer.start();
 
 
+//                }
+
+//            }, delay);
 
 
+//        }
 
 
     }

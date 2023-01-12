@@ -3,6 +3,7 @@ package com.hivefive.waterpuzzle;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        getSupportActionBar().hide();
 
         name = findViewById(R.id.name);
         animation = findViewById(R.id.animation);
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 Intent i =new Intent(getApplicationContext(),MainMenu.class);
                 startActivity(i);
+                finishAffinity();
             }
         },4000);
     }
